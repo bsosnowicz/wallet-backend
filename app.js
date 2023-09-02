@@ -3,7 +3,9 @@ const logger = require("morgan");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const router = require("./router/user");
+const balanceRouter = require("./router/balance");
 mongoose.Promise = global.Promise;
+require("./config/config-passport");
 
 const app = express();
 
@@ -14,5 +16,10 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/", router);
+app.use("/balance", balanceRouter);
+
+app.use((req, res) => {
+  res.status(404).json({ message: "not found" });
+});
 
 module.exports = app;

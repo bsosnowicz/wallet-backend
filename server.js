@@ -1,9 +1,9 @@
 const app = require("./app");
 const mongoose = require("mongoose");
 
-const PORT = "3000";
+const PORT = 8000;
 const uriDB =
-  "mongodb+srv://bsosnowicz:kupsko333@wallet.lshufuy.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://bsosnowicz:kupsko333@wallet.lshufuy.mongodb.net/wallet?retryWrites=true&w=majority";
 
 const connections = mongoose.connect(uriDB, {
   useNewUrlParser: true,
