@@ -13,16 +13,15 @@ const params = {
 };
 
 passport.use(
-  new Strategy(params, function (payload, done) {
-    User.find({ _id: payload.id })
-      .then(([user]) => {
-        if (!user) {
-          return done(new Error("User is not here anymore"));
-        }
-        return done(null, user);
-      })
-      .catch((e) => {
-        console.log(e.message);
-      });
+  new Strategy(params, async function (payload, done) {
+    try {
+      const user = await User.findOne({ _id: payload.id });
+      if (!user) {
+        return done(null, false, { message: "User not found" });
+      }
+      return done(null, user);
+    } catch (e) {
+      console.log(e.message);
+    }
   })
 );

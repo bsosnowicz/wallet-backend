@@ -58,12 +58,24 @@ router.post("/register", async (req, res, next) => {
     token = jwt.sign(payload, "siema", { expiresIn: "1h" });
     newUser.token = token;
     await newUser.save();
+    const currentDate = new Date();
 
     const newBalance = new Balance({
       _id: id,
       balance: 0,
       transactionHistory: {
-        date: new Date().toISOString(),
+        date: `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)
+          .toString()
+          .padStart(2, "0")}-${currentDate
+          .getDate()
+          .toString()
+          .padStart(2, "0")} ${currentDate
+          .getHours()
+          .toString()
+          .padStart(2, "0")}:${currentDate
+          .getMinutes()
+          .toString()
+          .padStart(2, "0")}`,
         title: "Account registered!",
       },
     });
