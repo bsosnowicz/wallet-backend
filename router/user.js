@@ -38,11 +38,17 @@ router.post("/register", async (req, res, next) => {
   try {
     const user = await User.findOne({ email });
     if (user) {
-      return res.json({
-        status: 409,
-        code: 409,
-        data: "Conflict",
-        message: "email in use",
+      return res.status(409).json({
+        status: "error",
+        code: "409",
+        message: "Email in use",
+      });
+    }
+    if (!username || !email || !password) {
+      return res.status(400).json({
+        status: "error",
+        code: "400",
+        message: "Username, email and password are required",
       });
     }
     const newUser = new User({ _id: id, username, email, balance });
@@ -88,29 +94,37 @@ router.post("/register", async (req, res, next) => {
 
 router.post("/login", async (req, res, next) => {
   const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({
+      status: "error",
+      code: "400",
+      message: "Both email and password are required",
+    });
+  }
   try {
     const user = await User.findOne({ email });
+
     if (!user || !user.validPassword(password)) {
-      return res.json({
+      return res.status(401).json({
         status: "error",
         code: 401,
-        data: "Bad request",
         message: "Incorrect password/login",
       });
+    } else {
+      const payload = {
+        id: user.id,
+      };
+
+      const token = jwt.sign(payload, "siema", { expiresIn: "1h" });
+      user.token = token;
+      user.save();
+
+      return res.json({
+        status: "success",
+        code: 200,
+        data: { token },
+      });
     }
-    const payload = {
-      id: user.id,
-    };
-
-    const token = jwt.sign(payload, "siema", { expiresIn: "1h" });
-    user.token = token;
-    user.save();
-
-    return res.json({
-      status: "success",
-      code: 200,
-      data: { token },
-    });
   } catch (e) {
     return res.status(400).send(e.message);
   }
