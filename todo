@@ -15,4 +15,8 @@ getBalance ✓
 getTransactionHistory ✓
 buyItem ✓
 depositBalance ✓
-clearHistory✓
+clearHistory✓\
+
+
+refreshToken
+formatowanie daty na frontendzie

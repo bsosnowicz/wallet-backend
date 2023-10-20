@@ -12,7 +12,6 @@ const auth = (req, res, next) => {
     if (!user || err || user.token === null) {
       res.status(401).json({
         status: "error",
-        code: 401,
         message: "Unautrhorized",
         data: "unauthorized",
       });

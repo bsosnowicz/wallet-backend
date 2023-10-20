@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const PORT = 8000;
 const uriDB =
-  "mongodb+srv://bsosnowicz:kupsko333@wallet.lshufuy.mongodb.net/wallet?retryWrites=true&w=majority";
+  "mongodb+srv://liamskurwol:kupsko333@b-zone.w1prhep.mongodb.net/wallet?retryWrites=true&w=majority";
 
 const connections = mongoose.connect(uriDB, {
   useNewUrlParser: true,
