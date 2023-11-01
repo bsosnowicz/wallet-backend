@@ -28,18 +28,7 @@ router.post("/create", auth, async (req, res, next) => {
         currency: "BTC",
         balance: 0,
         transactionHistory: {
-          date: `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)
-            .toString()
-            .padStart(2, "0")}-${currentDate
-            .getDate()
-            .toString()
-            .padStart(2, "0")} ${currentDate
-            .getHours()
-            .toString()
-            .padStart(2, "0")}:${currentDate
-            .getMinutes()
-            .toString()
-            .padStart(2, "0")}`,
+          date: new Date(),
           title: "Account registered!",
         },
       },

@@ -41,18 +41,7 @@ router.put("/deposit", auth, async (req, res, next) => {
   const currentBalance = currentWallet.balance + amount;
 
   const newTransaction = {
-    date: `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)
-      .toString()
-      .padStart(2, "0")}-${currentDate
-      .getDate()
-      .toString()
-      .padStart(2, "0")} ${currentDate
-      .getHours()
-      .toString()
-      .padStart(2, "0")}:${currentDate
-      .getMinutes()
-      .toString()
-      .padStart(2, "0")}`,
+    date: new Date(),
     title: title,
     type: "Deposit",
     amount: amount,
@@ -93,18 +82,7 @@ router.put("/withdraw", auth, async (req, res, next) => {
   const currentBalance = currentWallet.balance - amount;
 
   const newTransaction = {
-    date: `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)
-      .toString()
-      .padStart(2, "0")}-${currentDate
-      .getDate()
-      .toString()
-      .padStart(2, "0")} ${currentDate
-      .getHours()
-      .toString()
-      .padStart(2, "0")}:${currentDate
-      .getMinutes()
-      .toString()
-      .padStart(2, "0")}`,
+    date: new Date(),
     title: title,
     type: "Withdraw",
     amount: amount,
@@ -149,36 +127,14 @@ router.put("/transfer", auth, async (req, res, next) => {
   const currentUserId = req.user._id;
 
   const newTransaction = {
-    date: `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)
-      .toString()
-      .padStart(2, "0")}-${currentDate
-      .getDate()
-      .toString()
-      .padStart(2, "0")} ${currentDate
-      .getHours()
-      .toString()
-      .padStart(2, "0")}:${currentDate
-      .getMinutes()
-      .toString()
-      .padStart(2, "0")}`,
+    date: new Date(),
     title: title,
     type: "Transfer received",
     amount: amount,
   };
 
   const newTransactionWithdraw = {
-    date: `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)
-      .toString()
-      .padStart(2, "0")}-${currentDate
-      .getDate()
-      .toString()
-      .padStart(2, "0")} ${currentDate
-      .getHours()
-      .toString()
-      .padStart(2, "0")}:${currentDate
-      .getMinutes()
-      .toString()
-      .padStart(2, "0")}`,
+    date: new Date(),
     title: title,
     type: "Transfer sent",
     amount: amount,
