@@ -1,9 +1,10 @@
 const app = require("./app");
 const mongoose = require("mongoose");
+require("dotenv").config();
 
+const secretKey = process.env.SECRET_KEY;
 const PORT = 8000;
-const uriDB =
-  "mongodb+srv://liamskurwol:kupsko333@b-zone.w1prhep.mongodb.net/wallet?retryWrites=true&w=majority";
+const uriDB = `mongodb+srv://liamskurwol:${secretKey}@b-zone.w1prhep.mongodb.net/wallet?retryWrites=true&w=majority`;
 
 const connections = mongoose.connect(uriDB, {
   useNewUrlParser: true,
